@@ -24,7 +24,11 @@ $(function() {
                 if (res.status !== 0) {
                     return layer.msg('修改密码失败！')
                 }
-                layer.msg('修改密码成功！')
+                layer.msg('修改密码成功！');
+                // 跳转到首页
+                window.parent.location.href = "../login.html";
+                // 清空本地的 token
+                localStorage.removeItem('token')
             })
     })
 })
