@@ -32,9 +32,15 @@ $(function() {
 
     // 点击退出
     $("#logout").click(function() {
-        // 清除本地存储模拟退出状态 请求退出接口
-        localStorage.removeItem('token')
-            // 跳转到登录页
-        location.href = './login.html'
+
+        layer.confirm('确定退出吗?', { icon: 3, title: '提示' }, function(index) {
+            // 清除本地存储模拟退出状态 请求退出接口
+            localStorage.removeItem('token')
+                // 跳转到登录页
+            location.href = './login.html'
+
+            layer.close(index);
+        });
+
     })
 })

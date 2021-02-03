@@ -41,6 +41,11 @@ $(function() {
             if (res.status !== 0) {
                 return layer.msg('获取失败!')
             }
+
+            // 调用模板函数之前注册过滤器
+            template.defaults.imports.dateFormat = function(date) {
+                return moment(date).format('YYYY-MM-DD HH:mm:ss');
+            };
             // 使用模板引擎渲染
             const htmlStr = template('tpl', res);
             // 添加到 tbody 中
@@ -88,6 +93,7 @@ $(function() {
         query.cate_id = cate_id
         query.state = state
 
+        query.pagenum = 1;
         // 重新调用  renderTable()
         renderTable()
     })
@@ -114,5 +120,12 @@ $(function() {
             })
             layer.close(index);
         });
+    })
+
+    $(document).on('click', '.edit-btn', function() {
+        const id = $(this).data('id')
+
+        location.href = `./edit.html?id=${ id }`
+
     })
 })
